@@ -9,10 +9,6 @@ services:
         UID: $U_ID
     volumes:
       - ./:/appdata/www
-    ###> XDEBUG 3 ###
-    # Use your client IP here
-    # Linux: run "ip a | grep docker0"
-    # Windows (with WSL2) and Mac: host.docker.internal
     environment:
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
@@ -26,7 +22,7 @@ services:
 
   symfony-course-skeleton-mysql:
     container_name: symfony-course-skeleton-mysql
-    image: mysql:8.0.26
+    image: mysql:8.0
     ports:
       - '3336:3306'
     environment:
@@ -43,4 +39,3 @@ networks:
 
 volumes:
   symfony-course-skeleton-mysql-data:
-
