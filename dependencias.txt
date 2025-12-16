@@ -1,0 +1,2 @@
+make prepare
+composer require --dev symfony/profiler-pack
