@@ -17,6 +17,13 @@ RUN apt-get update \
 
 RUN curl -sS https://getcomposer.org/download/2.2.21/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
+# Install NODE 14 and Yarn
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt -y install nodejs
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update && apt install yarn
+
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 RUN apt-get install -y symfony-cli
 

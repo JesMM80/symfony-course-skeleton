@@ -11,6 +11,9 @@
     "doctrine/lexer": {
         "version": "2.1.1"
     },
+    "monolog/monolog": {
+        "version": "2.10.0"
+    },
     "psr/cache": {
         "version": "2.0.0"
     },
@@ -22,6 +25,9 @@
     },
     "psr/log": {
         "version": "2.0.0"
+    },
+    "symfony/asset": {
+        "version": "v5.4.45"
     },
     "symfony/cache": {
         "version": "v5.4.3"
@@ -105,6 +111,21 @@
     "symfony/http-kernel": {
         "version": "v5.4.4"
     },
+    "symfony/monolog-bridge": {
+        "version": "v5.4.45"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.7",
+            "ref": "1b9efb10c54cb51c713a9391c9300ff8bceda459"
+        },
+        "files": [
+            "config/packages/monolog.yaml"
+        ]
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.24.0"
     },
@@ -184,6 +205,25 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.17",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.17",
+            "ref": "eeb7f3bae6214a0cee8f48310f14e48f5cf90ba3"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {
