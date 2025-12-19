@@ -1,4 +1,16 @@
 {
+    "doctrine/cache": {
+        "version": "2.2.0"
+    },
+    "doctrine/collections": {
+        "version": "2.4.0"
+    },
+    "doctrine/common": {
+        "version": "3.5.0"
+    },
+    "doctrine/dbal": {
+        "version": "3.10.4"
+    },
     "doctrine/deprecations": {
         "version": "1.1",
         "recipe": {
@@ -8,8 +20,48 @@
             "ref": "87424683adc81d7dc305eefec1fced883084aab9"
         }
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "3.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.1",
+            "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
+        ]
+    },
+    "doctrine/event-manager": {
+        "version": "1.2.0"
+    },
+    "doctrine/inflector": {
+        "version": "2.1.0"
+    },
+    "doctrine/instantiator": {
+        "version": "2.0.0"
+    },
     "doctrine/lexer": {
         "version": "2.1.1"
+    },
+    "doctrine/migrations": {
+        "version": "3.5.5"
+    },
+    "doctrine/orm": {
+        "version": "2.20.9"
+    },
+    "doctrine/persistence": {
+        "version": "3.4.3"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.5.3"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.19"
+    },
+    "laminas/laminas-code": {
+        "version": "4.16.0"
     },
     "monolog/monolog": {
         "version": "2.10.0"
@@ -55,6 +107,9 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v3.0.0"
+    },
+    "symfony/doctrine-bridge": {
+        "version": "v5.4.48"
     },
     "symfony/dotenv": {
         "version": "v5.4.3"
@@ -143,6 +198,9 @@
     },
     "symfony/polyfill-php81": {
         "version": "v1.24.0"
+    },
+    "symfony/polyfill-php84": {
+        "version": "v1.33.0"
     },
     "symfony/routing": {
         "version": "5.4",
