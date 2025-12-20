@@ -13,13 +13,13 @@
         "symfony/dotenv": "5.4.*",
         "symfony/flex": "^1.17|^2",
         "symfony/framework-bundle": "5.4.*",
-        "symfony/monolog-bundle": "^3.11",
+        "symfony/monolog-bundle": "^3.7",
         "symfony/orm-pack": "^2.6",
         "symfony/polyfill-php80": "^1.33",
         "symfony/runtime": "5.4.*",
         "symfony/webpack-encore-bundle": "^2.4",
         "symfony/yaml": "5.4.*",
-        "twig/twig": "^3.22"
+        "twig/twig": "^3.0"
     },
     "config": {
         "allow-plugins": false,
