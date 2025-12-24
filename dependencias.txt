@@ -25,7 +25,8 @@ yarn encore dev
 
 
 composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+
 Añadir config/bundles.php la línea:
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
-
-composer require --dev symfony/maker-bundle
+    Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
