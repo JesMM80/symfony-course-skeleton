@@ -30,3 +30,9 @@ composer require --dev symfony/maker-bundle
 Añadir config/bundles.php la línea:
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
+
+Instalar en portatil:*******************************
+composer require twig/intl-extra
+composer require twig/extra-bundle
+composer require symfony/form:^6.4 symfony/validator:^6.4 symfony/security-csrf:^6.4
+
