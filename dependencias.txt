@@ -35,4 +35,4 @@ Instalar en portatil:*******************************
 composer require twig/intl-extra
 composer require twig/extra-bundle
 composer require symfony/form:^6.4 symfony/validator:^6.4 symfony/security-csrf:^6.4
-
+composer require uid

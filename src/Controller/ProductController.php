@@ -27,18 +27,18 @@ class ProductController extends AbstractController
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        $form->handleRequest($request);//Validation of form data
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $entityManager->persist($product); //Prepare to save the new product
+            $entityManager->flush(); //Save the new product to the database, execute SQL queries and commit the transaction
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('product/new.html.twig', [
+        return $this->renderForm('product/new.html.twig', [ //Template rendering with form
             'product' => $product,
-            'form' => $form->createView(),
+            'form' => $form
         ]);
     }
 
