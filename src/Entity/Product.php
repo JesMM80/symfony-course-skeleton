@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV4;
+use Symfony\Component\Validator\Constraints as Assert; //This is an alias
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\Index(columns: ['sku'], name: 'IDX_product_sku')]
@@ -13,21 +14,44 @@ use Symfony\Component\Uid\UuidV4;
 class Product
 {
     #[ORM\Id]
-    // #[ORM\GeneratedValue]
+    // #[ORM\Column(type: 'uuid')]  // Mejor que string+CHAR(36)
+    // private ?Uuid $id = null;
     #[ORM\Column(type:'string', columnDefinition: 'CHAR(36) NOT NULL')] 
     private ?string $id = null; //Será un string para el UUID
 
+    
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'name must be at least {{ limit }} characters long',
+        maxMessage: 'name cannot be longer than {{ limit }} characters',
+    )]
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 100)]
     private ?string $name = null;
-
+    
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'name must be at least {{ limit }} characters long',
+        maxMessage: 'name cannot be longer than {{ limit }} characters',
+    )]
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 50)]
     private ?string $sku = null;
 
-    #[ORM\Column(type: 'float', precision: 8, scale: 2)]
-    private ?float $price = null;
+    #[Assert\PositiveOrZero()]
+    #[Assert\NotBlank()]
+    #[ORM\Column(type: 'integer')]
+    private ?int $price = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdOn = null;
+
+    #[Assert\NotBlank()]
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -45,7 +69,7 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -81,9 +105,14 @@ class Product
         return $this->createdOn;
     }
 
-    public function setCreatedOn(\DateTimeInterface $createdOn): static
+    public function getCategory(): ?Category
     {
-        $this->createdOn = $createdOn;
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

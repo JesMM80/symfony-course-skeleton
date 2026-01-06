@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
                 <th>CreatedOn</th>
@@ -17,12 +18,13 @@
             </tr>
         </thead>
         <tbody>
-        {% for product in products %}
+        {% for product in products.results %}
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
+                <td>{{ product.category.name }}</td>
                 <td>{{ product.sku }}</td>
-                <td>{{ product.price }}</td>
+                <td>€ {{ product.price / 100 }}</td>
                 <td>{{ product.createdOn ? product.createdOn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
