@@ -20,7 +20,7 @@ class ProductController extends AbstractController
     {
         $latestProducts = $productRepository->findLatest($page);
         return $this->render('product/index.html.twig', [
-            'products' => $latestProducts->getResults(),
+            'paginator' => $latestProducts,
         ]);
     }
 

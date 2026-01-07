@@ -37,3 +37,4 @@ composer require symfony/form:^6.4 symfony/validator:^6.4 symfony/security-csrf:
 composer require symfony/uid
 Instalar en portatil:*******************************
 composer require symfony/validator
+composer require symfony/mailer y revisar symfony-docx para ver como configurarlo
