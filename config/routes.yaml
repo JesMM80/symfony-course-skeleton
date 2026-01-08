@@ -6,3 +6,11 @@
 #   path: /
 #   controller: App\Controller\HealthCheckController
 #   methods: [GET]
+
+#Con TemplateController podemos renderizar una plantilla sin necesidad de crear un controlador específico para ello
+homepage:
+  path: /
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+  methods: [GET]
+  defaults:
+    template: 'defaults/homepage.html.twig'

@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Event\CategoryCreated;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mime\Email;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/category')]
 class CategoryController extends AbstractController
@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -35,18 +35,12 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            $email = (new Email())
-                ->from('admin@example.com')
-                ->to('hazuki00@gmail.com')
-                ->subject('New Category Created')
-                ->text('A new category has been created.')
-                ->html($this->renderView('emails/new-category.html.twig', [
-                    'id' => $category->getId(),
-                    'name' => $category->getName(),
-                    'created_on' => $category->getCreatedOn()->format('Y-m-d H:i:s'),
-                ]));
-    
-            $mailer->send($email);
+            $dispatcher->dispatch(new CategoryCreated(
+                    $category->getId(),
+                    $category->getName(),
+                    $category->getCreatedOn()->format('Y-m-d H:i:s')
+                )
+            );
             
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
