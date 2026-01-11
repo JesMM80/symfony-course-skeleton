@@ -38,3 +38,4 @@ composer require symfony/uid
 Instalar en portatil:*******************************
 composer require symfony/validator
 composer require symfony/mailer y revisar symfony-docx para ver como configurarlo
+composer require symfony/translation

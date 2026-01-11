@@ -9,8 +9,11 @@
 
 #Con TemplateController podemos renderizar una plantilla sin necesidad de crear un controlador específico para ello
 homepage:
-  path: /
+  path: /{_locale} #El parámetro _locale es especial en Symfony y se utiliza para definir el idioma de la aplicación.
   controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
   methods: [GET]
+  requirements:
+    _locale: '%app_locales%' #Esto indica que el parámetro _locale solo puede tomar los valores definidos en el parámetro app_locales del archivo services.yaml
   defaults:
     template: 'defaults/homepage.html.twig'
+    _locale: 'en' #Establece el valor predeterminado del parámetro _locale en 'en' (inglés) si no se proporciona ningún valor en la URL.
