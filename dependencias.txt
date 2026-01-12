@@ -35,7 +35,9 @@ composer require twig/intl-extra
 composer require twig/extra-bundle
 composer require symfony/form:^6.4 symfony/validator:^6.4 symfony/security-csrf:^6.4
 composer require symfony/uid
-Instalar en portatil:*******************************
 composer require symfony/validator
-composer require symfony/mailer y revisar symfony-docx para ver como configurarlo
+composer require symfony/mailer 
 composer require symfony/translation
+
+Instalar en portatil:*******************************
+revisar symfony-docx para ver como configurar mailer en portátil
