@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71881d8956998c5d69b0f56f897c7233",
+    "content-hash": "4ed589fc7a8fa5f9e5af21a7b837ea94",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3927,20 +3927,19 @@
         },
         {
             "name": "symfony/orm-pack",
-            "version": "v2.6.0",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/orm-pack.git",
-                "reference": "0b6bfd50c44c63cc2207c684eb6efee89a525845"
+                "reference": "79a540bbaf8bf386ea112d35694dd4ea3911277e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/0b6bfd50c44c63cc2207c684eb6efee89a525845",
-                "reference": "0b6bfd50c44c63cc2207c684eb6efee89a525845",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/79a540bbaf8bf386ea112d35694dd4ea3911277e",
+                "reference": "79a540bbaf8bf386ea112d35694dd4ea3911277e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "^3",
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/doctrine-migrations-bundle": "*",
                 "doctrine/orm": "*"
@@ -3956,7 +3955,7 @@
             "description": "A pack for the Doctrine ORM",
             "support": {
                 "issues": "https://github.com/symfony/orm-pack/issues",
-                "source": "https://github.com/symfony/orm-pack/tree/v2.6.0"
+                "source": "https://github.com/symfony/orm-pack/tree/v2.7.0"
             },
             "funding": [
                 {
@@ -3976,7 +3975,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-19T07:18:51+00:00"
+            "time": "2026-01-07T18:00:45+00:00"
         },
         {
             "name": "symfony/password-hasher",

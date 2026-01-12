@@ -16,7 +16,7 @@
         "symfony/framework-bundle": "5.4.*",
         "symfony/mailer": "^7.4",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/orm-pack": "^2.6",
+        "symfony/orm-pack": "^2.7",
         "symfony/polyfill-php80": "^1.33",
         "symfony/runtime": "5.4.*",
         "symfony/security-csrf": "^6.4",
@@ -29,7 +29,10 @@
         "twig/twig": "^3.0"
     },
     "config": {
-        "allow-plugins": false,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
@@ -68,7 +71,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*"
+            "require": "6.4.*"
         }
     },
     "require-dev": {
