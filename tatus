@@ -1,0 +1,28 @@
+* [33m401618a[m[33m ([m[1;31morigin/traduccion[m[33m, [m[1;32mtraduccion[m[33m)[m finalizado edicion composer.json
+* [33m1b97e74[m Actualizado portatil salvo configuracion mailer Portatil
+* [33mb7283ac[m 1a parte traduccion completada
+[31m|[m * [33m8556e1d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;32msymfony_corregido[m[33m)[m Cambios en compose
+[31m|[m[31m/[m  
+* [33ma39d675[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Forms ended FX
+* [33m48c06f8[m Events added FX
+* [33mffad19a[m Mailer added FX
+* [33m7c69b18[m Forms validated FX
+* [33mbd297cb[m Formularios actualizados en portatil
+* [33m6729ea2[m form and view created FX
+* [33m462a2dc[m Se muestran listado productos FX
+* [33m58fb7df[m Creado crud FX
+* [33ma309a86[m Creada entidad Product FX
+* [33m53f7b30[m Modificada rama params.html Portatil
+* [33m733b381[m Modificada params.html Portatil
+* [33m2c0e218[m Actualizado en portatil con primera plantilla
+* [33mfeb42d6[m Contenedores creados con versiones actualizadas.Instalado Doctrine
+* [33m1ab41c1[m Configurado boostrap FX
+* [33mf3e00e4[m Instalado profiler, logger, yarn y bootstrap FX
+* [33mfa09056[m Componente profiler instalado FX
+* [33mf3d4237[m Clases de rutas y controladores terminada FX
+* [33m38c17be[m Primera ruta creada con atributos FX
+* [33me36c051[m Curso recien instalado. FX
+* [33mbb55728[m Comienzo curso FX
+* [33m7df05d4[m - Update README
+* [33m3b3db4c[m - Prepare project to start lessons
+* [33mee51715[m Initial commit

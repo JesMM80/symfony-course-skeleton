@@ -7,10 +7,16 @@ help:
 	@echo 'targets:'
 	@egrep '^(.+): ## (.+)' $(MAKEFILE_LIST) | column -t -c 2 -s ':#'
 
+# start: ## Start the containers
+# 	docker network create symfony-course-skeleton-network || true
+# 	cp -n docker-compose.yml.dist docker-compose.yml || true
+# 	U_ID=$(UID) docker compose up -d
+
 start: ## Start the containers
 	docker network create symfony-course-skeleton-network || true
-	cp -n docker-compose.yml.dist docker-compose.yml || true
 	U_ID=$(UID) docker compose up -d
+	$(MAKE) composer-install
+
 
 stop: ## Stop the containers
 	U_ID=$(UID) docker compose stop
