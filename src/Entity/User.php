@@ -16,7 +16,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', columnDefinition: 'CHAR(36) NOT NULL')]
     private ?string $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $email = null;
 
     /**
@@ -31,12 +31,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column]
-    private bool $isVerified = false;
-
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified;
+    
     public function __construct()
     {
         $this->id = Uuid::v4()->toRfc4122();
+        $this->isVerified = false;
     }
 
     public function getId(): ?string
