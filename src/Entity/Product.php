@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV4;
@@ -53,10 +55,17 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+    /**
+     * @var Collection<int, OrderItem>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class, orphanRemoval: true)]
+    private Collection $orderItems;
+
     public function __construct()
     {
         $this->id = UuidV4::v4()->toRfc4122();
-        $this->createdOn = new \DateTime(); 
+        $this->createdOn = new \DateTime();
+        $this->orderItems = new ArrayCollection(); 
     }
 
     public function getId(): ?string
@@ -113,6 +122,36 @@ class Product
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getProduct() === $this) {
+                $orderItem->setProduct(null);
+            }
+        }
 
         return $this;
     }
