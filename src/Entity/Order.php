@@ -33,9 +33,14 @@ class Order
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(mappedBy: 'orderEntity', targetEntity: OrderItem::class, orphanRemoval: true)]
-    private Collection $items;
-
+    #[ORM\OneToMany(mappedBy: 'orderEntity', targetEntity: OrderItem::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $items; 
+    //mappedBy es el nombre del atributo que tenemos en OrderItem que hace referencia a Order, en este caso orderEntity y 
+    //sirve para establecer la relacion bidireccional entre ambas entidades, es decir, que podamos acceder a los items 
+    // de una orden desde la entidad Order y viceversa, ademas de que al eliminar una orden se eliminen sus items asociados gracias a orphanRemoval=true
+    //Por otro lado $items sirve para almacenar la coleccion de items que tiene una orden, y al ser una relacion OneToMany 
+    //se inicializa como una ArrayCollection en el constructor de la clase Order
+    
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -124,4 +129,17 @@ class Order
 
         return $this;
     }
+
+    public function calculateTotal(): void
+    {
+        $total = 0;
+
+        foreach ($this->items as $item) {
+            $item->calculateUnitPrice();
+            $total += $item->getSubtotal();
+        }
+
+        $this->total = $total;
+    }
+
 }

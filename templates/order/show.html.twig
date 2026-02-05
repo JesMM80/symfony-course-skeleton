@@ -9,20 +9,37 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
                 <th>Status</th>
-                <td>{{ order.status }}</td>
-            </tr>
-            <tr>
                 <th>CreatedAt</th>
-                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Total</th>
             </tr>
             <tr>
-                <th>Total</th>
+                <td>{{ order.id }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ order.total }}</td>
             </tr>
+            <tr>
+                <th>Product</th>
+                <th>Units</th>
+                <th>Price</th>
+                <th>Current Price</th>
+                <th>Subtotal</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for item in order.items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unitPrice }}</td>
+                <td>{{ item.product.price }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td>
+                    {# <a href="{{ path('app_order_item_delete', {'orderId': order.id, 'itemId': item.id}) }}">Delete</a> #}
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 

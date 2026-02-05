@@ -36,16 +36,8 @@ final class OrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $total = 0;
-
-            foreach ($order->getItems() as $item) {
-                $product = $item->getProduct();
-
-                $item->setUnitPrice($product->getPrice());
-                $total += $product->getPrice() * $item->getQuantity();
-            }
-
-            $order->setTotal($total);
+            $order->setStatus('pending');
+            $order->calculateTotal();
 
             $entityManager->persist($order);
             $entityManager->flush();
@@ -63,6 +55,12 @@ final class OrderController extends AbstractController
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
     public function show(Order $order): Response
     {
+        //Comprobamos que el usuario que ha creado la orden es el mismo que esta intentando verla, 
+        //si no es asi lanzamos una excepcion de acceso denegado
+        if ($order->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('order/show.html.twig', [
             'order' => $order,
         ]);
@@ -96,4 +94,15 @@ final class OrderController extends AbstractController
 
         return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    // #[Route('/{orderId}/item/{itemId}', name: 'app_order_item_delete', methods: ['POST'])]
+    // public function deleteItem(Order $order, OrderItem $orderItem): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->getPayload()->getString('_token'))) {
+    //         $order->removeItem($order->getItemById($request->get('itemId')));
+    //         $entityManager->flush();
+    //     }
+
+    //     return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

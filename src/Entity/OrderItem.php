@@ -91,4 +91,19 @@ class OrderItem
 
         return $this;
     }
+
+    public function calculateUnitPrice(): void
+    {
+        if ($this->product === null) {
+            throw new \LogicException('OrderItem must have a product.');
+        }
+
+        $this->unitPrice = $this->product->getPrice();
+    }
+
+    public function getSubtotal(): float
+    {
+        return $this->unitPrice * $this->quantity;
+    }
+
 }
