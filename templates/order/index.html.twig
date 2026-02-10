@@ -25,6 +25,7 @@
                 <td>
                     <a href="{{ path('app_order_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
+                    <a href="{{ path('app_confirm_delete', {'id': order.id}) }}">delete</a>
                 </td>
             </tr>
         {% else %}

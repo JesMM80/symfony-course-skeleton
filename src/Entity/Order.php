@@ -113,6 +113,7 @@ class Order
         if (!$this->items->contains($item)) {
             $this->items->add($item);
             $item->setOrderEntity($this);
+
         }
 
         return $this;

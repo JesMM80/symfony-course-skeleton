@@ -61,11 +61,18 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class, orphanRemoval: true)]
     private Collection $orderItems;
 
+    /**
+     * @var Collection<int, Supplier>
+     */
+    #[ORM\ManyToMany(targetEntity: Supplier::class, inversedBy: 'products')]
+    private Collection $suppliers;
+
     public function __construct()
     {
         $this->id = UuidV4::v4()->toRfc4122();
         $this->createdOn = new \DateTime();
-        $this->orderItems = new ArrayCollection(); 
+        $this->orderItems = new ArrayCollection();
+        $this->suppliers = new ArrayCollection(); 
     }
 
     public function getId(): ?string
@@ -152,6 +159,33 @@ class Product
                 $orderItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Supplier>
+     */
+    public function getSuppliers(): Collection
+    {
+        return $this->suppliers;
+    }
+
+    //Este método es necesario para mantener la relación bidireccional entre Product y Supplier, ya que el 
+    //lado inverso (Supplier) también tiene una colección de productos. Al agregar un proveedor a un producto, 
+    //también se agrega el producto a la colección de productos del proveedor. 
+    public function addSupplier(Supplier $supplier): static
+    {
+        if (!$this->suppliers->contains($supplier)) {
+            $this->suppliers->add($supplier);
+        }
+
+        return $this;
+    }
+
+    public function removeSupplier(Supplier $supplier): static
+    {
+        $this->suppliers->removeElement($supplier);
 
         return $this;
     }

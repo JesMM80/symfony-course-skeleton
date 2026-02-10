@@ -95,14 +95,12 @@ final class OrderController extends AbstractController
         return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    // #[Route('/{orderId}/item/{itemId}', name: 'app_order_item_delete', methods: ['POST'])]
-    // public function deleteItem(Order $order, OrderItem $orderItem): Response
-    // {
-    //     if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->getPayload()->getString('_token'))) {
-    //         $order->removeItem($order->getItemById($request->get('itemId')));
-    //         $entityManager->flush();
-    //     }
-
-    //     return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
-    // }
+    #[Route('/confirm_delete/{id}', name:'app_confirm_delete', methods: ['GET'])]
+    public function confirmDelete(Order $order): Response
+    {
+        return $this->render('order/confirm_delete.html.twig', [
+            'order' => $order,
+        ]);
+    }
+ 
 }

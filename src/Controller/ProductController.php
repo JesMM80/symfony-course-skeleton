@@ -65,9 +65,17 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/edit.html.twig', [
+        return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/confirm_delete/{id}', name: 'app_confirm_delete', methods: ['GET'])]
+    public function confirmDelete(Product $id): Response
+    {
+        return $this->render('product/confirm_delete.html.twig', [
+            'product' => $id,
         ]);
     }
 
@@ -81,4 +89,6 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }

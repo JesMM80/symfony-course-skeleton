@@ -44,7 +44,11 @@
     </table>
 
     <a href="{{ path('app_order_index') }}">back to list</a>
-
-    <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
+    <div class="alert alert-danger mt-3" role="alert">
+        <p>¿Está seguro de que desea eliminar esta orden?</p>
+        <div class="d-flex justify-content-end">
+            {{ include('order/_delete_form.html.twig') }}   
+        </div>
+    </div>
 
 {% endblock %}

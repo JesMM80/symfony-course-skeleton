@@ -95,7 +95,7 @@ class OrderItem
     public function calculateUnitPrice(): void
     {
         if ($this->product === null) {
-            throw new \LogicException('OrderItem must have a product.');
+            return;
         }
 
         $this->unitPrice = $this->product->getPrice();
