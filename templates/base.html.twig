@@ -25,6 +25,7 @@
                                 <li><a href="{{ path('app_product_index') }}" class="nav-link px-2 {{ app.request.pathInfo == '/product/' ? 'text-white' : 'text-secondary' }}">{{ 'menu.item.products'|trans }}</a></li>
                                 <li><a href="{{ path('app_order_new') }}" class="nav-link px-2 {{ app.request.pathInfo == '/create' ? 'text-white' : 'text-secondary' }}">New Order</a></li>
                                 <li><a href="{{ path('app_order_index') }}" class="nav-link px-2 {{ app.request.pathInfo == '/index' ? 'text-white' : 'text-secondary' }}">My Orders</a></li>
+                                <li><a href="{{ path('app_supplier_index') }}" class="nav-link px-2 {{ app.request.pathInfo == '/supplier/' ? 'text-white' : 'text-secondary' }}">Suppliers</a></li>
                             {% endif %}
                         </ul>
                         <ul class="nav col-2">
