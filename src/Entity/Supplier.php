@@ -27,9 +27,16 @@ class Supplier
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'suppliers')]
     private Collection $products;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $phone = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this ->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -84,6 +91,30 @@ class Supplier
         if ($this->products->removeElement($product)) {
             $product->removeSupplier($this);
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?int $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }

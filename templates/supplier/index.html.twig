@@ -11,6 +11,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Phone</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,10 +20,11 @@
             <tr>
                 <td>{{ supplier.id }}</td>
                 <td>{{ supplier.name }}</td>
+                <td>{{ supplier.phone }}</td>
                 <td>
                     <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}">show</a>
-                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">edit</a>
-                    <a href="{{ path('app_confirm_delete_supplier', {'id': supplier.id}) }}">delete</a>
+                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="ms-2">edit</a>
+                    <a href="{{ path('app_confirm_delete', {'id': supplier.id}) }}" class="ms-2">delete</a> 
                 </td>
             </tr>
         {% else %}

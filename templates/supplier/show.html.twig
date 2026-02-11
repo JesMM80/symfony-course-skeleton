@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suppliers Index{% endblock %}
+
+{% block main %}
+    
+    <h1>Supplier info</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ supplier.id }}</td>
+                <td>{{ supplier.name }}</td>
+                <td>{{ supplier.phone }}</td>
+                <td>{{ supplier.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_supplier_index') }}">back to list</a>
+
+{% endblock %}
