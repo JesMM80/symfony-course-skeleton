@@ -24,6 +24,15 @@
                 <td>{{ product.price }}</td>
             </tr>
             <tr>
+                <th>Suppliers</th>
+                <td>
+                    {% for supplier in product.suppliers %}
+                    {# Este if comprueba si no es el último elemento para evitar una coma al final #}
+                        {{ supplier.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
                 <th>CreatedOn</th>
                 <td>{{ product.createdOn ? product.createdOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

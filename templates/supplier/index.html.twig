@@ -12,6 +12,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Phone</th>
+                <th>Postal Code</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <td>{{ supplier.id }}</td>
                 <td>{{ supplier.name }}</td>
                 <td>{{ supplier.phone }}</td>
+                <td>{{ supplier.postalCode }}</td>
                 <td>
                     <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}">show</a>
                     <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="ms-2">edit</a>

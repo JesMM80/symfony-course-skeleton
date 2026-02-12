@@ -16,6 +16,7 @@ class SupplierType extends AbstractType
         $builder
             ->add('name')
             ->add('phone')
+            ->add('postal_code')
             ->add('address')
         ;
     }

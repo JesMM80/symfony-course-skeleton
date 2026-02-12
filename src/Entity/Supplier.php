@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SupplierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SupplierRepository::class)]
@@ -32,6 +33,9 @@ class Supplier
 
     #[ORM\Column(nullable: true)]
     private ?int $phone = null;
+
+    #[ORM\Column(length: 6, nullable: true)]
+    private ?string $postal_code = null;
 
     public function __construct()
     {
@@ -115,6 +119,18 @@ class Supplier
     public function setPhone(?int $phone): static
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postal_code;
+    }
+
+    public function setPostalCode(?string $postal_code): static
+    {
+        $this->postal_code = $postal_code;
 
         return $this;
     }
