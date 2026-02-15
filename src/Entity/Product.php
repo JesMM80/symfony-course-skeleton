@@ -66,7 +66,7 @@ class Product
      */
     #[ORM\ManyToMany(targetEntity: Supplier::class, inversedBy: 'products')]
     private Collection $suppliers; //Es el lado propietario porque es el que tiene la anotación @ORM\ManyToMany 
-    //sin mappedBy, y el lado inverso (Supplier) tiene mappedBy='suppliers'
+    //sin mappedBy, y el lado inverso (Supplier) tiene mappedBy='suppliers' 
 
     public function __construct()
     {
