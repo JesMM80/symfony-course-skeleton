@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\SupplierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,19 @@ class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_product_index', defaults: ['page' => 1], methods: ['GET'])]
     #[Route('/page/{page<[0-9]\d*>}', name: 'product_index_paginated', methods: ['GET'])]
-    public function index(ProductRepository $productRepository, int $page = 1): Response
+    public function index(Request $request, ProductRepository $productRepository, int $page = 1, SupplierRepository $supplierRepository): Response
     {
-        $latestProducts = $productRepository->findLatest($page);
+        $supplierId = $request->query->get('supplier');
+
+        if ($supplierId) {
+            $supplier = $supplierRepository->findBySupplier($supplierId, $page);
+        } else {
+            $paginator = $productRepository->findLatest($page);
+        }
+
         return $this->render('product/index.html.twig', [
-            'paginator' => $latestProducts,
+            'paginator' => $paginator,
+            'suppliers' => $supplierRepository->findAll(),
         ]);
     }
 

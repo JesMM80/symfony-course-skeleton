@@ -5,6 +5,20 @@
 {% block main %}
     <h1>Product index</h1>
 
+    {# Añadimos un formulario de búsqueda para filtrar los productos por supplier #}
+    <form method="get" action="{{ path('product_index_paginated') }}">
+        <div class="form-group">
+            <label for="supplier">Supplier:</label>
+            <select name="supplier" id="supplier" class="form-control">
+                <option value="">All Suppliers</option>
+                {% for supplier in paginator.results %}
+                    <option value="{{ supplier.id }}" {{ (app.request.get('supplier') == supplier.id) ? 'selected' : '' }}>{{ supplier.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
     <table class="table">
         <thead>
             <tr>

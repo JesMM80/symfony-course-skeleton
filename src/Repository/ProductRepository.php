@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Supplier;
 use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,6 +28,16 @@ class ProductRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('p')->orderBy('p.createdOn', 'DESC');
         return (new Paginator($qb))->paginate($page);
+    }
+
+    public function findBySupplier(Supplier $supplier): array
+    {
+    return $this->createQueryBuilder('p')
+        ->innerJoin('p.suppliers', 's')
+        ->andWhere('s = :supplier')
+        ->setParameter('supplier', $supplier)
+        ->getQuery()
+        ->getResult();
     }
 
 //    /**
