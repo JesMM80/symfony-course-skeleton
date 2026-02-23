@@ -6,17 +6,33 @@
     <h1>Product index</h1>
 
     {# Añadimos un formulario de búsqueda para filtrar los productos por supplier #}
-    <form method="get" action="{{ path('product_index_paginated') }}">
+    <form method="get" action="{{ path('product_index_paginated', {page: 1}) }}">
         <div class="form-group">
             <label for="supplier">Supplier:</label>
             <select name="supplier" id="supplier" class="form-control">
                 <option value="">All Suppliers</option>
-                {% for supplier in paginator.results %}
-                    <option value="{{ supplier.id }}" {{ (app.request.get('supplier') == supplier.id) ? 'selected' : '' }}>{{ supplier.name }}</option>
+                {% for supplier in suppliers %}
+                    <option value="{{ supplier.id }}"
+                        {{ selectedSupplier == supplier.id ? 'selected' : '' }}>
+                        {{ supplier.name }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Filter</button>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select name="category" id="category" class="form-control">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+
+                    <option value="{{ category.id }}"
+                        {{ selectedCategory == category.id ? 'selected' : '' }}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Filter</button>
     </form>
 
     <table class="table">
@@ -32,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for product in paginator.results %}
+        {% for product in products %}
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
@@ -51,7 +67,7 @@
                 <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
-        {% if paginator.hasToPaginate %}
+        {% if paginator and paginator.hasToPaginate %}
 
             <div class="navigation text-center">
                 <ul class="pagination pagination-lg">

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SupplierRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,19 +19,28 @@ class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_product_index', defaults: ['page' => 1], methods: ['GET'])]
     #[Route('/page/{page<[0-9]\d*>}', name: 'product_index_paginated', methods: ['GET'])]
-    public function index(Request $request, ProductRepository $productRepository, int $page = 1, SupplierRepository $supplierRepository): Response
+    public function index(
+        Request $request, 
+        ProductRepository $productRepository,  
+        SupplierRepository $supplierRepository,
+        CategoryRepository $categoryRepository,
+        int $page = 1): Response
     {
         $supplierId = $request->query->get('supplier');
+        $categoryId = $request->query->get('category');
 
-        if ($supplierId) {
-            $supplier = $supplierRepository->findBySupplier($supplierId, $page);
-        } else {
-            $paginator = $productRepository->findLatest($page);
-        }
+        $supplier = $supplierId ? $supplierRepository->find($supplierId) : null;
+        $category = $categoryId ? $categoryRepository->find($categoryId) : null;
+
+        $paginator = $productRepository->findByFilters($supplier, $category, $page);
 
         return $this->render('product/index.html.twig', [
-            'paginator' => $paginator,
-            'suppliers' => $supplierRepository->findAll(),
+        'products' => $paginator->getResults(),
+        'paginator' => $paginator,
+        'suppliers' => $supplierRepository->findAll(),
+        'categories' => $categoryRepository->findAll(),
+        'selectedSupplier' => $supplierId,
+        'selectedCategory' => $categoryId,
         ]);
     }
 

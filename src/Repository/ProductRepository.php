@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\Supplier;
 use App\Pagination\Paginator;
@@ -30,14 +31,23 @@ class ProductRepository extends ServiceEntityRepository
         return (new Paginator($qb))->paginate($page);
     }
 
-    public function findBySupplier(Supplier $supplier): array
+    public function findByFilters(?Supplier $supplier, ?Category $category, int $page = 1): Paginator
     {
-    return $this->createQueryBuilder('p')
-        ->innerJoin('p.suppliers', 's')
-        ->andWhere('s = :supplier')
-        ->setParameter('supplier', $supplier)
-        ->getQuery()
-        ->getResult();
+        $qb = $this->createQueryBuilder('p');
+        $qb->orderBy('p.createdOn', 'DESC');
+
+        if ($supplier) {
+            $qb->innerJoin('p.suppliers', 's')
+               ->andWhere('s = :supplier')
+               ->setParameter('supplier', $supplier);
+        }
+        if ($category) {
+            $qb->innerJoin('p.category', 'c')
+               ->andWhere('c = :category')
+               ->setParameter('category', $category);
+        }
+        return (new Paginator($qb))->paginate($page);
+
     }
 
 //    /**
