@@ -65,15 +65,23 @@ class Product
      * @var Collection<int, Supplier>
      */
     #[ORM\ManyToMany(targetEntity: Supplier::class, inversedBy: 'products')]
-    private Collection $suppliers; //Es el lado propietario porque es el que tiene la anotación @ORM\ManyToMany 
+    private Collection $suppliers;
+    //Es el lado propietario porque es el que tiene la anotación @ORM\ManyToMany 
     //sin mappedBy, y el lado inverso (Supplier) tiene mappedBy='suppliers' 
+
+    /**
+     * @var Collection<int, StockMovement>
+     */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: StockMovement::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $stockMovements; 
 
     public function __construct()
     {
         $this->id = UuidV4::v4()->toRfc4122();
         $this->createdOn = new \DateTime();
         $this->orderItems = new ArrayCollection();
-        $this->suppliers = new ArrayCollection(); 
+        $this->suppliers = new ArrayCollection();
+        $this->stockMovements = new ArrayCollection(); 
     }
 
     public function getId(): ?string
@@ -187,6 +195,36 @@ class Product
     public function removeSupplier(Supplier $supplier): static
     {
         $this->suppliers->removeElement($supplier);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StockMovement>
+     */
+    public function getStockMovements(): Collection
+    {
+        return $this->stockMovements;
+    }
+
+    public function addStockMovement(StockMovement $stockMovement): static
+    {
+        if (!$this->stockMovements->contains($stockMovement)) {
+            $this->stockMovements->add($stockMovement);
+            $stockMovement->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockMovement(StockMovement $stockMovement): static
+    {
+        if ($this->stockMovements->removeElement($stockMovement)) {
+            // set the owning side to null (unless already changed)
+            if ($stockMovement->getProduct() === $this) {
+                $stockMovement->setProduct(null);
+            }
+        }
 
         return $this;
     }
